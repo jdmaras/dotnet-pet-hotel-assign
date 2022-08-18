@@ -143,7 +143,8 @@ Ideally you will create a PetBreed Enum and PetColor Enum to limit the available
 ### Pet Owner API
 `/api/petowners` is the base URL for the Pet Owner API
 
-`GET /api/petowners/` should return a list of pet owner objects. A Pet Owner should have a read-only `petCount` field that contains the number of pets that belong to the pet owner.
+`GET /api/petowners/` should return a list of pet owner objects. A Pet Owner should have a read-only `petCount` field that contains the number of pets that belong to the pet owner. 
+DONE
 
 `GET /api/pets/:id` should return the `PetOwner` object with the given id.
 

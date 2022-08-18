@@ -17,13 +17,54 @@ namespace pet_hotel.Controllers
             _context = context;
         }
 
-        // This is just a stub for GET / to prevent any weird frontend errors that 
-        // occur when the route is missing in this controller
         [HttpGet]
-        public IEnumerable<PetOwner> GetPets()
+        //
+        public IEnumerable<PetOwner> GetAll()
         {
-            Console.WriteLine("get the pet owners, baby");
-            return new List<PetOwner>();
+            Console.WriteLine("get all owners");
+            return _context.PetOwners;
         }
+
+        [HttpPost]
+        public IActionResult Post(PetOwner petOwner)
+        {
+            Console.WriteLine("adding a petowner");
+            _context.Add(petOwner);
+            _context.SaveChanges();
+
+            return CreatedAtAction(nameof(Post), new { id = petOwner.id }, petOwner);
+        }
+
+        [HttpDelete("{id}")]
+        public IActionResult Delete(int id)
+        {
+            PetOwner petOwner = _context.PetOwners.SingleOrDefault(petOwner => petOwner.id == id);
+
+            if (petOwner is null)
+            {
+                return NotFound();
+            }
+            _context.PetOwners.Remove(petOwner);
+            _context.SaveChanges();
+            return NoContent();
+        }
+
+        // THIS SEARCHING PET AND FIND OWNER ID OF PET DEFINITELY ISN'T RIGHT
+
+        // [HttpGet{"{id}"}]
+        // public ActionResult<PetOwner> GetOwnerPet(int id)
+        // {
+        //     Console.WriteLine("getting one pet");
+        //     Pet pet = _context.Pets
+        //     .Include(PetOwner => PetOwner.PetOwnerId)
+        //     .SingleOrDefault(pet => pet.id == id);
+
+        //     if (pet is null)
+        //         {
+        //             return NotFound();
+        //         }
+        //     return pet
+        // }
+
     }
 }

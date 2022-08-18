@@ -25,9 +25,9 @@ namespace pet_hotel
         public PetBreedType breed { get; set; }
 
         public DateTime checkedInAt { get; set; }
-        [ForeignKey("PetOwner")]
+        [ForeignKey("petOwner")]
         public int PetOwnerId { get; set; }
-        public virtual PetOwner petOwner { get; set; }
+        public PetOwner petOwner { get; set; }
 
     }
 }
